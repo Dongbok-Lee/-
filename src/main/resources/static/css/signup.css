@@ -1,0 +1,14 @@
+.signup_form {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 10em;
+}
+
+.signup_input > input {
+    display: inline-block;
+    width: 300px;
+}
+
+.cfm_email {
+    margin-top: 20px;
+}

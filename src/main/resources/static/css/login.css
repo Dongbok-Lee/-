@@ -1,0 +1,10 @@
+.login-form {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 10em;
+}
+
+.login_input > input {
+    display: inline-block;
+    width: 300px;
+}

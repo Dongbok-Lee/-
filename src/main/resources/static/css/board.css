@@ -1,0 +1,13 @@
+.board-table {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 10em;
+}
+
+.board-title {
+    margin-bottom: 50px;
+}
+
+.table-hover > tbody {
+    cursor: pointer;
+}
