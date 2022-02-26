@@ -1,5 +1,6 @@
 package com.dongbok.board.service;
 
+import com.dongbok.board.model.RoleType;
 import com.dongbok.board.model.User;
 import com.dongbok.board.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final BCryptPasswordEncoder encoder;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserService(BCryptPasswordEncoder encoder, UserRepository userRepository){
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.encoder = encoder;
     }
 
     @Transactional
@@ -25,6 +26,7 @@ public class UserService {
         String rawPassword = user.getPassword();
         String encPassword = encoder.encode(rawPassword);
         user.setPassword(encPassword);
+        user.setRole(RoleType.USER);
         userRepository.save(user);
     }
 }

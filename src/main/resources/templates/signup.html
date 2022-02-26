@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,11 +38,11 @@
 <!-- 메인 부분 -->
 <section class="signup_form">
     <h1>Sign-up</h1>
-    <form class="form-horizontal" action="/action_page.php">
+    <form class="form-horizontal"  th:action="@{/user}" th:object="${User}" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="email">Email:</label>
             <div class="col-sm-10 signup_input">
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
+                <input type="email" class="form-control" id="email" th:name="email" placeholder="Enter email" required>
                 <p>중복된 이메일 입니다. 다른 이메일로 시도해 주세요.</p>
                 <p>사용가능한 이메일 입니다.</p>
                 <button type="button" class="btn btn-primary btn-xs cfm_email">이메일 중복 체크</button>
@@ -51,7 +51,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="nickname">nickname:</label>
             <div class="col-sm-10 signup_input">
-                <input type="email" class="form-control" id="nickname" placeholder="Enter nickname">
+                <input type="text" class="form-control" id="nickname" th:name="nickname" placeholder="Enter nickname" required>
                 <p>중복된 닉네임 입니다. 다른 닉네임으로 시도해 주세요.</p>
                 <p>사용가능한 닉네임 입니다.</p>
                 <button type="button" class="btn btn-primary btn-xs cfm_email">닉네임 중복 체크</button>
@@ -60,11 +60,11 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Password:</label>
             <div class="col-sm-10 signup_input">
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                <input type="password" class="form-control" id="pwd" th:name="password" placeholder="Enter password" required>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="cfm-pwd">Confirm-Password:</label>
+            <label class="control-label col-sm-2" for="cfm_pwd">Confirm-Password:</label>
             <div class="col-sm-10 signup_input">
                 <input type="password" class="form-control" id="cfm_pwd" placeholder="Enter password">
                 <p>패스워드를 확인해주세요</p>
