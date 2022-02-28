@@ -1,0 +1,22 @@
+.note-frame{
+    width: 600px;
+    margin: 0 auto;
+}
+
+.note-editing-area{
+    height: 200px;
+}
+.post_form{
+    position: relative;
+    width: 600px;
+    margin: 0 auto 100px;
+
+}
+.post_btn{
+    position: absolute;
+    right : 0;
+    bottom: -50px;
+}
+.board_text{
+margin: 50px 0 50px 300px;
+}
