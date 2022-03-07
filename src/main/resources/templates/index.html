@@ -51,14 +51,43 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="board : ${list}">
-            <td th:text="${board.id}">John</td>
-            <td th:text="${board.title}">Doe</td>
-            <td th:text="${board.user.nickname}">john@example.com</td>
+        <tr th:each="board : ${list}" th:onclick="|location.href='@{/board(boardidx=${board.id})}'|">
+            <td th:text="${board.id}"></td>
+            <td th:text="${board.title}"></td>
+            <td th:text="${board.user.nickname}"></td>
         </tr>
         </tbody>
     </table>
 </section>
+
+<nav style = "text-align: center">
+    <ul class="pagination"
+        th:with="start=${T(Math).floor(list.number/10)*10 + 1},
+                    last=(${start + 9 < list.totalPages ? start + 9 : list.totalPages})">
+        <li>
+            <a th:href="@{/(page=1)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+        <li th:class ="${list.first} ? 'disabled'">
+            <a th:href="${list.first} ? '#' :@{/(page=${list.number})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(start, last)}" th:class = "${page ==list.number +1}? 'active'">
+            <a th:text="${page}" th:href="@{/(page=${page})}">1</a></li>
+        <li th:class = "${list.last} ? '#' : @{/(page=${list.number+2})}">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+        <li>
+            <a th:href = "@{/(page=${list.totalPages})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->

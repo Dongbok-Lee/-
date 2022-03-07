@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -31,7 +32,7 @@ public class Board_Controller {
     }
 
     @GetMapping("/")
-    public String index(Model model, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
+    public String index(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
         model.addAttribute("list",boardService.getBoardList(pageable));
         return "index";
     }
@@ -48,5 +49,12 @@ public class Board_Controller {
         board.setUser(user);
         boardService.save(board);
         return "redirect:/";
+    }
+
+    @GetMapping("/board")
+    public String viewDetail(Model model, @RequestParam(value = "boardidx") int boardIdx){
+        Board board = boardService.getBoard(boardIdx);
+        model.addAttribute("board", board);
+        return "board";
     }
 }
