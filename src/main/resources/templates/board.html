@@ -58,16 +58,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>첫 댓글</td>
-            <td>동복</td>
+        <tr th:each = "reply : ${board.reply}">
+            <td th:text ="${reply.content}">첫 댓글</td>
+            <td th:text = "${reply.user.nickname}">동복</td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<form class ="reply-form" action="">
-    <input type="text" class="form-control" placeholder="Leave comment">
+<form class ="reply-form" th:action="@{/write_comment}" th:object="${Reply}" method="post">
+    <input type="hidden" th:name="board" th:value = "${board.id}">
+    <input type="text" th:name="content" class="form-control" placeholder="Leave comment">
     <button type="submit" class="btn btn-success">submit</button>
 </form>
 </body>

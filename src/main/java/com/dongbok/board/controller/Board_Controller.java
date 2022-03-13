@@ -1,8 +1,10 @@
 package com.dongbok.board.controller;
 
 import com.dongbok.board.model.Board;
+import com.dongbok.board.model.Reply;
 import com.dongbok.board.model.User;
 import com.dongbok.board.repository.BoardRepository;
+import com.dongbok.board.repository.ReplyRepository;
 import com.dongbok.board.repository.UserRepository;
 import com.dongbok.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class Board_Controller {
 
     private final BoardService boardService;
     private final UserRepository userRepository;
+    private final ReplyRepository replyRepository;
 
     @Autowired
-    public Board_Controller(BoardService boardService, UserRepository userRepository){
+    public Board_Controller(BoardService boardService, UserRepository userRepository, ReplyRepository replyRepository){
         this.boardService = boardService;
         this.userRepository = userRepository;
+        this.replyRepository = replyRepository;
     }
 
     @GetMapping("/")
@@ -49,6 +55,14 @@ public class Board_Controller {
         board.setUser(user);
         boardService.save(board);
         return "redirect:/";
+    }
+
+    @PostMapping("/write_comment")
+    public String writeComment(@ModelAttribute Reply reply, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName()).get();
+        reply.setUser(user);
+        replyRepository.save(reply);
+        return "redirect:";
     }
 
     @GetMapping("/board")
