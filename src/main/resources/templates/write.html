@@ -38,7 +38,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/signup" sec:authorize="isAnonymous()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
             <li><a href="/login" sec:authorize="isAnonymous()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            <li><a href="/user_info" sec:authorize="isAuthenticated()"><span sec:authentication="name" class="glyphicon glyphicon-user"></span></a></li>
+            <li><a href="/user_info" sec:authorize="isAuthenticated()"><span th:text="${user.nickname}" class="glyphicon glyphicon-user"></span></a></li>
             <li><a href="/write" sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-pencil"></span> Write-Post</a></li>
             <li><a href="/logout" sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 

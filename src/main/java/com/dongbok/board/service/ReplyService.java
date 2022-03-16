@@ -21,4 +21,10 @@ public class ReplyService {
     public void save(Reply reply){
         replyRepository.save(reply);
     }
+
+    @Transactional
+    public void delete(int replyid){
+        replyRepository.deleteById(replyid);
+    }
+
 }

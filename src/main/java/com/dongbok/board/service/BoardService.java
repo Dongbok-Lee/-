@@ -25,6 +25,19 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
+    public void delete(int boardId){
+        boardRepository.deleteById(boardId);
+    }
+
+    @Transactional
+    public void update(Board requestBoard){
+        Board board = boardRepository.getById(requestBoard.getId());
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+        // 함수가 끝나면 트랜잭션이 종료되면서 더티체킹하고 flush한다.
+    }
+
     @Transactional(readOnly = true)
     public Page<Board> getBoardList(Pageable pageable){
         int page = (pageable.getPageNumber()==0)?0:(pageable.getPageNumber()-1);

@@ -33,7 +33,7 @@ public class Board {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany(mappedBy ="board",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy ="board",cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private List<Reply> reply;
 
     @CreationTimestamp
