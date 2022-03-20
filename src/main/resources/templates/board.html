@@ -48,11 +48,12 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title" th:text = "${board.title}"></h3>
-        <button th:if="${board.user.nickname} == ${user.nickname}" th:onclick="|location.href='/edit?boardidx=${board.id}'|" class="btn btn-warning">글 수정하기</button>
+        <button sec:authorize="isAuthenticated()" th:if="${board.user.nickname} == ${user.nickname}" th:onclick="|location.href='/edit?boardidx=${board.id}'|" class="btn btn-warning">글 수정하기</button>
         <form th:action="@{/delete_post}" method="post" class="delete_form">
             <input type="hidden" th:name="boardidx" th:value="${board.id}">
-            <button th:if="${board.user.nickname} == ${user.nickname}" class="btn btn-danger">글 삭제하기</button>
+            <button sec:authorize="isAuthenticated()" th:if="${board.user.nickname} == ${user.nickname}" class="btn btn-danger">글 삭제하기</button>
         </form>
+        <span>조회수: <span th:text ="${board.count}"></span></span>
     </div>
     <div class="panel-body" th:text = "${board.content}"></div>
     <table class="table table-striped">

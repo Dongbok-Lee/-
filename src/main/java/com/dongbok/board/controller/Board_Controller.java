@@ -83,6 +83,11 @@ public class Board_Controller {
     @GetMapping("/board")
     public String viewDetail(Principal principal,Model model, @RequestParam(value = "boardidx") int boardIdx){
         Board board = boardService.getBoard(boardIdx);
+        //조회수 증가
+        int cnt = board.getCount()+1;
+        board.setCount(cnt);
+        boardService.save(board);
+
         model.addAttribute("board", board);
         if(principal != null){
             User user = userRepository.findByEmail(principal.getName()).get();
